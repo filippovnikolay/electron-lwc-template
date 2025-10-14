@@ -1,0 +1,63 @@
+{
+  "name": "electron-lwc-hello",
+  "version": "1.0.0",
+  "description": "Electron + LWC demo app",
+  "author": "Your Name",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "clean": "rimraf dist release",
+    "build": "npm run clean && rollup -c",
+    "watch": "rollup -c -w",
+    "electron:dev": "cross-env NODE_ENV=development electron .",
+    "dev": "npm-run-all --parallel watch electron:dev",
+    "start": "npm run build && cross-env NODE_ENV=production electron .",
+    "dist": "npm run build && electron-builder"
+  },
+  "devDependencies": {
+    "@lwc/rollup-plugin": "^8.22.4",
+    "@rollup/plugin-replace": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "electron": "^38.2.1",
+    "electron-builder": "^26.0.12",
+    "electron-reload": "^2.0.0-alpha.1",
+    "lwc": "^8.22.4",
+    "rollup": "^4.52.4",
+    "rollup-plugin-copy": "^3.4.0",
+    "rimraf": "^5.0.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.28.0",
+    "lightning-base-components": "^1.27.2-alpha"
+  },
+  "build": {
+    "appId": "com.yourcompany.electronlwc",
+    "asar": true,
+    "asarUnpack": "dist/**",
+    "files": [
+      "main.js",
+      "package.json",
+      "dist/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "allowElevation": true
+    }
+  }
+}

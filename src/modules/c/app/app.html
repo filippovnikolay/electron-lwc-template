@@ -1,0 +1,32 @@
+<template>
+    <lightning-button
+            variant="brand"
+            label="My Button 7"
+            title="Looks like a link"
+            onclick={handleClick}
+            class="slds-m-left_x-small"
+    ></lightning-button>
+    <lightning-button variant="brand" label="Download" title="Download action with base variant" icon-name="utility:download" class="slds-m-left_x-small"></lightning-button>
+
+
+    <lightning-dual-listbox name="languages"
+                            label="Select Languages"
+                            source-label="Available"
+                            selected-label="Selected"
+                            field-level-help="Select your preferred languages"
+                            options={options}
+                            onchange={handleChange}>
+
+    </lightning-dual-listbox>
+    <div class="slds-box" >
+        <p>Selected values are: {selected}</p>
+    </div>
+
+    <p id="action" class="slds-box slds-text-heading_small">Action icons represent actions a user can take. The default
+        size of action icons are larger than the others. <br /><br />
+        <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved"></lightning-icon>
+        <lightning-icon icon-name="action:delete" alternative-text="Delete" title="Delete"></lightning-icon>
+        <lightning-icon icon-name="action:new_note" alternative-text="New note" title="New note"></lightning-icon>
+        <lightning-icon icon-name="action:preview" alternative-text="Preview" title="Preview"></lightning-icon>
+    </p>
+</template>
