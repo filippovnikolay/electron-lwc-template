@@ -3,3 +3,4 @@ dist/
 release/
 dist_electron/
 .idea/
+/package-lock.json
