@@ -37,3 +37,10 @@ The **release** folder contains both the unpacked version of your built applicat
 ### Debugging
 
 To debug your app, open the Electron Developer Tools from View → Toggle Developer Tools.
+
+### Documentation
+
+1. LWC Open Source: https://lwc.dev/guide/introduction
+2. Examples: https://recipes.lwc.dev/#hello
+3. LWC repo: https://github.com/trailheadapps/lwc-recipes-oss/blob/main/README.md
+4. Electron JS: https://www.electronjs.org/
