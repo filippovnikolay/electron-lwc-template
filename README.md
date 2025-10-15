@@ -15,17 +15,17 @@ This project combines:
 ### Install dependencies
 
 ```bash
-npm install
+    npm install
 ```
 
 ### Development mode
 
 ```bash
-npm run dev
+    npm run dev
 ```
 
 ### Production (build .exe file) 
 
 ```bash
-npm run dist
+    npm run dist
 ```
