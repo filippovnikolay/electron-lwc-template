@@ -8,7 +8,11 @@ const copy = require('rollup-plugin-copy');
 const rimraf = require('rimraf');
 
 const distDir = path.resolve('dist');
-rimraf.sync(distDir);
+// In watch mode, do not wipe dist — dev runs Electron in parallel with watch and needs index.html to exist.
+const isRollupWatch = process.env.ROLLUP_WATCH === 'true' || process.argv.includes('-w');
+if (!isRollupWatch) {
+    rimraf.sync(distDir);
+}
 
 export default {
   input: 'src/index.js',

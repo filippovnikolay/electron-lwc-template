@@ -1,8 +1,58 @@
 <template lwc:render-mode="light">
     <div class="slds-m-around--large">
-        <lightning-card variant="base" title="Salesforce LWC Template" icon-name="standard:account">
-            <p class="slds-p-horizontal_small">This is basic electron + LWC + SLDS project template.</p>
-            <p slot="footer">@2025</p>
+        <lightning-card variant="base" title="Electron + LWC + Salesforce" icon-name="standard:account">
+            <div class="slds-p-horizontal_small">
+                <template lwc:if={errorMessage}>
+                    <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_small" role="alert">
+                        <span class="slds-assistive-text">error</span>
+                        <h2>{errorMessage}</h2>
+                    </div>
+                </template>
+
+                <p class="slds-m-bottom_small">
+                    Status:
+                    <template lwc:if={connected} class="slds-m-left--small">
+                        <strong>Signed in</strong>
+                    </template>
+                    <template lwc:else class="slds-m-left--small">
+                        <strong>Not signed in</strong>
+                    </template>
+                </p>
+
+                <template lwc:if={connected} class="slds-m-bottom_large">
+                    <p class="slds-text-body_small slds-m-bottom_x-small">User Id: {userId}</p>
+                    <p class="slds-text-body_small slds-m-bottom_x-small">Org Id: {orgId}</p>
+                    <p class="slds-text-body_small slds-m-bottom_small">Instance: {instanceUrl}</p>
+                </template>
+
+                <div class="slds-m-top_small">
+                    <lightning-button
+                        variant="brand"
+                        label="Sign in with Salesforce"
+                        onclick={handleLogin}
+                        disabled={busy}
+                        class="slds-m-right_x-small"
+                    ></lightning-button>
+                    <lightning-button
+                        variant="destructive"
+                        label="Sign out"
+                        onclick={handleLogout}
+                        disabled={busy}
+                        class="slds-m-right_x-small"
+                    ></lightning-button>
+                    <lightning-button
+                        variant="neutral"
+                        label="Run sample SOQL"
+                        onclick={handleSampleQuery}
+                        disabled={busy}
+                    ></lightning-button>
+                </div>
+
+                <template lwc:if={queryJson}>
+                    <pre class="slds-m-top_medium slds-text-body_small slds-scrollable_y" style="max-height: 240px">{queryJson}</pre>
+                </template>
+            </div>
+            <p slot="footer">Uses jsforce in the Electron main process (.env for Connected App).</p>
         </lightning-card>
     </div>
 </template>

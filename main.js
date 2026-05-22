@@ -1,19 +1,30 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { app } from 'electron';
+import { loadDotenv } from './electron/env/loadDotenv.js';
+import { restoreSessionFromDisk } from './electron/auth/session-restore.js';
+import { registerSalesforceIpc } from './electron/ipc/register-salesforce-ipc.js';
+import { createMainWindow } from './electron/window/create-main-window.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
-function createWindow() {
-  const win = new BrowserWindow({ width: 1000, height: 700 });
+loadDotenv(__dirname);
 
-  const indexPath = path.join(__dirname, 'dist', 'index.html'); // works in dev & prod
-  win.loadFile(indexPath);
+async function start() {
+    await app.whenReady();
+    registerSalesforceIpc();
+    await restoreSessionFromDisk();
+    createMainWindow({ rootDir: __dirname });
 }
 
-app.whenReady().then(createWindow);
+start().catch((err) => {
+    console.error(err);
+    app.quit();
+});
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });

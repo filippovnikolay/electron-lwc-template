@@ -7,8 +7,19 @@ This project combines:
 - **LWC (Lightning Web Components)** – for fast, modular UI
 - **Salesforce Lightning Design System (SLDS)** – for Salesforce-styled UI
 - **Rollup** – for bundling your app
+- **jsforce** – Salesforce REST/OAuth
 
 ---
+
+## Salesforce sign-in (Connected App)
+
+1. In Salesforce, create a **Connected App** with OAuth enabled. Enable **PKCE** (“Require Proof Key for Code Exchange (PKCE) for the Authorization Code Flow”).
+2. Set the **Callback URL** to a fixed local URL (example: `http://localhost:5173/oauth/callback`). That URL must match **exactly** in the app and in the Connected App.
+3. Copy `.env.example` to `.env` and set:
+   - `SF_CLIENT_ID` – Consumer Key from the Connected App
+   - `SF_CALLBACK_URL` – same callback URL as in the Connected App
+   - `SF_LOGIN_URL` – example: https://yoursandboxdomain.sandbox.my.salesforce.com
+4. Add OAuth scopes on the Connected App such as **Access and manage your data (api)** and **Perform requests at any time (refresh_token, offline_access)**.
 
 ## Getting Started
 
