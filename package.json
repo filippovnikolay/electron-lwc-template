@@ -12,7 +12,7 @@
     "electron:dev": "cross-env NODE_ENV=development electron .",
     "dev": "rollup -c && npm-run-all --parallel watch electron:dev",
     "start": "npm run build && cross-env NODE_ENV=production electron .",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && node scripts/prepare-packaging-files.mjs && electron-builder"
   },
   "devDependencies": {
     "@lwc/rollup-plugin": "^8.22.4",
@@ -25,10 +25,12 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^5.0.0",
     "rollup": "^4.52.4",
-    "rollup-plugin-copy": "^3.4.0"
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-import-css": "^4.2.1"
   },
   "dependencies": {
-    "@salesforce-ux/design-system": "^2.28.0",
+    "@lwc/synthetic-shadow": "^9.3.6",
+    "@salesforce-ux/design-system-2": "^2.264.0",
     "dotenv": "^17.4.2",
     "jsforce": "^3.10.15",
     "lightning-base-components": "^1.27.2-alpha"
@@ -36,13 +38,19 @@
   "build": {
     "appId": "com.yourcompany.electronlwc",
     "asar": true,
-    "asarUnpack": "dist/**",
     "files": [
       "main.js",
       "electron/**/*.js",
       "preload.cjs",
       "package.json",
       "dist/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "packaging",
+        "to": ".",
+        "filter": ["**/*"]
+      }
     ],
     "directories": {
       "output": "release"

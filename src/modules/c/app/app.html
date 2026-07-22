@@ -1,5 +1,5 @@
 <template lwc:render-mode="light">
-    <div class="slds-m-around--large">
+    <div class="slds-m-around_large">
         <lightning-card variant="base" title="Electron + LWC + Salesforce" icon-name="standard:account">
             <div class="slds-p-horizontal_small">
                 <template lwc:if={errorMessage}>
@@ -11,15 +11,15 @@
 
                 <p class="slds-m-bottom_small">
                     Status:
-                    <template lwc:if={connected} class="slds-m-left--small">
-                        <strong>Signed in</strong>
+                    <template lwc:if={connected}>
+                        <strong class="slds-m-left_small">Signed in</strong>
                     </template>
-                    <template lwc:else class="slds-m-left--small">
-                        <strong>Not signed in</strong>
+                    <template lwc:else>
+                        <strong class="slds-m-left_small">Not signed in</strong>
                     </template>
                 </p>
 
-                <template lwc:if={connected} class="slds-m-bottom_large">
+                <template lwc:if={connected}>
                     <p class="slds-text-body_small slds-m-bottom_x-small">User Id: {userId}</p>
                     <p class="slds-text-body_small slds-m-bottom_x-small">Org Id: {orgId}</p>
                     <p class="slds-text-body_small slds-m-bottom_small">Instance: {instanceUrl}</p>
@@ -52,7 +52,6 @@
                     <pre class="slds-m-top_medium slds-text-body_small slds-scrollable_y" style="max-height: 240px">{queryJson}</pre>
                 </template>
             </div>
-            <p slot="footer">Uses jsforce in the Electron main process (.env for Connected App).</p>
         </lightning-card>
     </div>
 </template>
